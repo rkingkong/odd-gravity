@@ -1,0 +1,62 @@
+:root{
+  --page-bg-1:#060b1c; --page-bg-2:#0b1633;
+  --card-bg:#ffffff; --text:#0f172a; --muted:#64748b;
+  --brand:#0ea5e9; --brand-2:#22d3ee; --accent:#14b8a6; --danger:#ef4444;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+body{
+  margin:0; font-family:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,sans-serif;
+  color:#e5f3ff; overflow-x:hidden;
+  background:
+    radial-gradient(900px 600px at 10% 0%, #12224c66 0%, transparent 60%),
+    radial-gradient(900px 600px at 90% 0%, #1a2b6666 0%, transparent 60%),
+    linear-gradient(160deg, var(--page-bg-1), var(--page-bg-2));
+}
+.page{
+  min-height:100dvh; /* dynamic vh for mobile browser chrome */
+  display:flex; flex-direction:column; align-items:center;
+  padding: calc(16px + env(safe-area-inset-top,0px)) 14px calc(24px + env(safe-area-inset-bottom,0px));
+  gap: 8px;
+}
+.h1{ margin:4px 0 6px; color:#e5f3ff; text-shadow:0 1px 0 #0008; text-align:center }
+.card{
+  backdrop-filter:saturate(1.1) blur(6px);
+  background:linear-gradient(180deg,#ffffffee,#fffffffa);
+  border:1px solid #e2e8f0; border-radius:20px; box-shadow:0 10px 30px #0003;
+  padding:10px; color: var(--text);
+}
+
+/* ——— GAME SHELL ——— */
+.gameShell{
+  width: min(560px, 96vw);
+  /* we let JS pick exact canvas size, but keep a ceiling so it never grows too large */
+  display:grid; place-items:center;
+}
+canvas{ display:block; touch-action:none; -webkit-tap-highlight-color:transparent }
+
+/* Controls/UI */
+.btn,.select{ font:600 14px/1 system-ui; padding:10px 14px; border-radius:999px; border:0 }
+.btn{ background:linear-gradient(90deg,var(--brand),var(--brand-2)); color:white; cursor:pointer; transition:transform .08s ease, filter .12s ease }
+.btn:active{ transform:translateY(1px) }
+.btn.secondary{ background:#e2e8f0; color:#0f172a }
+.controls{ display:flex; gap:8px; flex-wrap:wrap; justify-content:center; margin:12px 0 }
+.select{ background:#e2e8f0; color:#0f172a; padding:8px 12px; border-radius:10px }
+.small{ font-size:12px; color:#cbd5e1; text-align:center }
+.list{ color:#e2e8f0 }
+.pill{ display:inline-block; padding:4px 10px; border-radius:999px; font:600 12px/1 system-ui; background:#0ea5e933; color:#e0f7ff; border:1px solid #38bdf8 }
+.installbar{ position:sticky; top: calc(8px + env(safe-area-inset-top,0px)); z-index:10; display:flex; gap:8px; align-items:center; justify-content:center }
+@media (min-width:768px){ .page{ padding-top:28px } }
+
+/* Settings gear + popover */
+.settingsWrap{ position:relative }
+.iconbtn{
+  background:#0ea5e9; color:white; border:0; border-radius:999px; width:36px; height:36px;
+  display:grid; place-items:center; cursor:pointer; box-shadow:0 4px 10px #0004
+}
+.popover{
+  position:absolute; top:42px; right:0; min-width:160px; padding:10px; border-radius:12px;
+  background:#0b1225; color:#e5f3ff; border:1px solid #1e293b; box-shadow:0 8px 30px #0006; z-index:20
+}
+.switch{ display:flex; align-items:center; gap:8px; padding:6px 4px; font:500 14px system-ui }
+.row{ width:min(560px,96vw); display:flex; align-items:center; justify-content:space-between; margin-bottom:4px }
