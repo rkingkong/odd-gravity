@@ -1449,10 +1449,6 @@ function adjustColor(hex, amount) {
   return `#${(1 << 24 | r << 16 | g << 8 | b).toString(16).slice(1)}`
 }
 
-function clamp(v, a, b) {
-  return Math.max(a, Math.min(b, v))
-}
-
 function drawBackground(ctx, W, H, kind, now, d) {
   if (kind === 'sky') {
     const g = ctx.createLinearGradient(0, 0, 0, H)

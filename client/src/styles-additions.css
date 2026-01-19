@@ -1,0 +1,427 @@
+/* ========================================
+   PRODUCTION CSS ADDITIONS FOR ODD GRAVITY
+   Add these styles to your existing styles.css
+   ======================================== */
+
+/* ========== MOBILE OPTIMIZATIONS ========== */
+
+/* Prevent pull-to-refresh on mobile */
+html, body {
+  overscroll-behavior: none;
+  overscroll-behavior-y: none;
+}
+
+/* Prevent text selection during gameplay */
+.gameShell {
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  touch-action: none;
+}
+
+/* Prevent iOS tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Safe area support for notched phones */
+.page {
+  padding-left: env(safe-area-inset-left, 16px);
+  padding-right: env(safe-area-inset-right, 16px);
+  padding-bottom: env(safe-area-inset-bottom, 16px);
+}
+
+/* ========== LOADING STATES ========== */
+
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+  color: var(--fg);
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 16px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.loading-text {
+  font-size: 14px;
+  color: var(--fg-muted);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* ========== OFFLINE INDICATOR ========== */
+
+.offline-banner {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background: linear-gradient(90deg, #ef4444, #dc2626);
+  color: white;
+  text-align: center;
+  padding: 8px 16px;
+  font-size: 12px;
+  font-weight: 600;
+  z-index: 9999;
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+/* ========== UPDATE NOTIFICATION ========== */
+
+.update-notification {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  z-index: 10000;
+  animation: slideUp 0.3s ease-out;
+  color: var(--fg);
+  font-size: 14px;
+}
+
+.update-notification button {
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
+  transition: transform 0.1s;
+}
+
+.update-notification button:hover {
+  transform: scale(1.05);
+}
+
+.update-notification button:first-of-type {
+  background: var(--accent);
+  color: white;
+}
+
+.update-notification button:last-of-type {
+  background: var(--bg-hover);
+  color: var(--fg-muted);
+}
+
+/* ========== IMPROVED BUTTONS ========== */
+
+.btn {
+  transition: transform 0.1s ease, box-shadow 0.1s ease, background 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* ========== GAME CANVAS IMPROVEMENTS ========== */
+
+.gameShell canvas {
+  display: block;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  /* Crisp pixel rendering */
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ========== ACHIEVEMENT POPUP IMPROVEMENTS ========== */
+
+.achievement-popup {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border: 2px solid #fbbf24;
+  border-radius: 16px;
+  padding: 16px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
+  z-index: 10000;
+  animation: achievementSlide 0.4s ease-out, achievementGlow 2s ease-in-out infinite;
+}
+
+@keyframes achievementSlide {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-30px) scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0) scale(1);
+  }
+}
+
+@keyframes achievementGlow {
+  0%, 100% {
+    box-shadow: 0 8px 32px rgba(251, 191, 36, 0.2);
+  }
+  50% {
+    box-shadow: 0 8px 40px rgba(251, 191, 36, 0.4);
+  }
+}
+
+.achievement-icon {
+  font-size: 36px;
+  animation: bounce 0.5s ease-out;
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.achievement-title {
+  font-weight: 700;
+  font-size: 16px;
+  color: #fbbf24;
+}
+
+.achievement-desc {
+  font-size: 12px;
+  color: var(--fg-muted);
+  margin-top: 2px;
+}
+
+/* ========== TUTORIAL IMPROVEMENTS ========== */
+
+.tutorial-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+.tutorial-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  padding: 32px;
+  max-width: 340px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  animation: slideUp 0.4s ease-out;
+}
+
+.tutorial-card h3 {
+  font-size: 24px;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.tutorial-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.tutorial-icon {
+  font-size: 24px;
+  flex-shrink: 0;
+}
+
+.tutorial-item p {
+  font-size: 14px;
+  color: var(--fg-muted);
+  line-height: 1.5;
+}
+
+.tutorial-item strong {
+  color: var(--fg);
+}
+
+.tutorial-card .btn {
+  width: 100%;
+  margin-top: 24px;
+  padding: 14px;
+  font-size: 16px;
+}
+
+/* ========== GAME OVER SCREEN IMPROVEMENTS ========== */
+
+.game-over-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.game-over-score {
+  font-size: 64px;
+  font-weight: 800;
+  color: white;
+  text-shadow: 0 4px 20px rgba(14, 165, 233, 0.5);
+}
+
+.game-over-label {
+  font-size: 14px;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.game-over-best {
+  color: #22c55e;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+/* ========== LEADERBOARD POLISH ========== */
+
+.lb tr {
+  transition: background 0.15s ease;
+}
+
+.lb tr:hover td {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.lb-you {
+  background: rgba(14, 165, 233, 0.1) !important;
+}
+
+.lb-you td {
+  border-color: rgba(14, 165, 233, 0.3) !important;
+}
+
+/* ========== RESPONSIVE POLISH ========== */
+
+@media (max-width: 400px) {
+  .page {
+    padding: 12px;
+  }
+  
+  .h1 {
+    font-size: 20px;
+  }
+  
+  .btn {
+    padding: 10px 14px;
+    font-size: 13px;
+  }
+  
+  .gameShell canvas {
+    border-radius: 8px;
+  }
+  
+  .tutorial-card {
+    padding: 24px;
+  }
+  
+  .achievement-popup {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  
+  .achievement-icon {
+    font-size: 28px;
+  }
+}
+
+/* ========== HIGH CONTRAST / ACCESSIBILITY ========== */
+
+@media (prefers-contrast: high) {
+  .btn {
+    border: 2px solid currentColor;
+  }
+  
+  .gameShell canvas {
+    border: 2px solid var(--border);
+  }
+}
+
+/* ========== REDUCED MOTION ========== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  
+  .loading-spinner {
+    animation: none;
+    border-color: var(--accent);
+  }
+}
+
+/* ========== DARK MODE SUPPORT (if system prefers) ========== */
+
+/* Already dark by default, but ensure consistency */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* ========== PRINT STYLES (for sharing screenshots) ========== */
+
+@media print {
+  .btn,
+  .controls,
+  footer,
+  .leaderboard-section {
+    display: none !important;
+  }
+  
+  .gameShell {
+    box-shadow: none;
+  }
+}
